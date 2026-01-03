@@ -25,12 +25,14 @@ export interface Screen {
  *    - Можно комбинировать imageUrl + figmaUrl для переключения режимов
  */
 
+const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 export const screens: Screen[] = [
   // Прямые ссылки на макеты из Figma (png лежат в public/screens)
   {
     id: 'landing-page',
     name: 'Landing Page',
-    imageUrl: '/screens/landing.png',
+    imageUrl: `${prefix}/screens/landing.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=314%3A8186',
     category: 'Структура',
     description: 'Главный лендинг Verifluence.io',
@@ -40,7 +42,7 @@ export const screens: Screen[] = [
   {
     id: 'brand-dashboard',
     name: 'Brand Dashboard',
-    imageUrl: '/screens/brand-dashboard.png',
+    imageUrl: `${prefix}/screens/brand-dashboard.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=2161%3A46985',
     category: 'Casino',
     description: 'Дашборд казино: обзор метрик и быстрые действия',
@@ -48,7 +50,7 @@ export const screens: Screen[] = [
   {
     id: 'brand-onboarding',
     name: 'Casino Onboarding',
-    imageUrl: '/screens/onboarding-flow.png',
+    imageUrl: `${prefix}/screens/onboarding-flow.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1036%3A16521',
     category: 'Casino',
     description: 'Онбординг для нового казино в дашборде',
@@ -56,7 +58,7 @@ export const screens: Screen[] = [
   {
     id: 'campaign-builder',
     name: 'Campaign Builder',
-    imageUrl: '/screens/campaign-builder.png',
+    imageUrl: `${prefix}/screens/campaign-builder.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=518%3A12758',
     category: 'Casino',
     description: 'Мультишаговое создание кампании',
@@ -64,7 +66,7 @@ export const screens: Screen[] = [
   {
     id: 'brand-verification',
     name: 'Brand Verification',
-    imageUrl: '/screens/brand-verification.png',
+    imageUrl: `${prefix}/screens/brand-verification.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=34%3A1146',
     category: 'Casino',
     description: 'Верификация бренда (KYC) с загрузкой документов',
@@ -72,7 +74,7 @@ export const screens: Screen[] = [
   {
     id: 'streamer-search-discovery',
     name: 'Streamer Search & Discovery',
-    imageUrl: '/screens/streamer-search.png',
+    imageUrl: `${prefix}/screens/streamer-search.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1477%3A27843',
     category: 'Casino',
     description: 'Поиск стримеров с фильтрами и сортировкой',
@@ -80,7 +82,7 @@ export const screens: Screen[] = [
   {
     id: 'streamer-management',
     name: 'Streamer Management',
-    imageUrl: '/screens/streamer-management.png',
+    imageUrl: `${prefix}/screens/streamer-management.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1791%3A33414',
     category: 'Casino',
     description: 'Рабочее пространство кампаний стримера',
@@ -88,7 +90,7 @@ export const screens: Screen[] = [
   {
     id: 'streamer-verification-page',
     name: 'Streamer Verification Dashboard',
-    imageUrl: '/screens/streamer-verification.png',
+    imageUrl: `${prefix}/screens/streamer-verification.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1746%3A21772',
     category: 'Casino',
     description: 'Детали верификации и аналитика по стримеру',
@@ -96,7 +98,7 @@ export const screens: Screen[] = [
   {
     id: 'casino-analytics',
     name: 'Casino Analytics',
-    imageUrl: '/screens/casino-analytics.png',
+    imageUrl: `${prefix}/screens/casino-analytics.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=825%3A13111',
     category: 'Casino',
     description: 'Аналитика кампаний и ROI',
@@ -104,7 +106,7 @@ export const screens: Screen[] = [
   {
     id: 'casino-payments-escrow',
     name: 'Casino Payments & Escrow',
-    imageUrl: '/screens/casino-payments.png',
+    imageUrl: `${prefix}/screens/casino-payments.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1078%3A14717',
     category: 'Casino',
     description: 'Эскроу, бюджеты и выплаты',
@@ -114,7 +116,7 @@ export const screens: Screen[] = [
   {
     id: 'streamer-dashboard',
     name: 'Streamer Dashboard',
-    imageUrl: '/screens/streamer-dashboard.png',
+    imageUrl: `${prefix}/screens/streamer-dashboard.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1601%3A28102',
     category: 'Streamer',
     description: 'Дашборд стримера с KPI и статусами',
@@ -122,7 +124,7 @@ export const screens: Screen[] = [
   {
     id: 'campaign-browser',
     name: 'Campaign Browser',
-    imageUrl: '/screens/campaign-browser.png',
+    imageUrl: `${prefix}/screens/campaign-browser.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=139%3A11824',
     category: 'Streamer',
     description: 'Каталог кампаний для отклика',
@@ -130,7 +132,7 @@ export const screens: Screen[] = [
   {
     id: 'streamer-payments',
     name: 'Streamer Payments & Earnings',
-    imageUrl: '/screens/streamer-payments.png',
+    imageUrl: `${prefix}/screens/streamer-payments.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1854%3A63530',
     category: 'Streamer',
     description: 'Платежи, история и статусы выплат',
@@ -140,7 +142,7 @@ export const screens: Screen[] = [
   {
     id: 'onboarding-flow',
     name: 'Onboarding Flow',
-    imageUrl: '/screens/onboarding-flow.png',
+    imageUrl: `${prefix}/screens/onboarding-flow.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1036%3A16521',
     category: 'Both',
     description: 'Пример онбординга нового пользователя',
@@ -148,7 +150,7 @@ export const screens: Screen[] = [
   {
     id: 'sign-in',
     name: 'Sign In',
-    imageUrl: '/screens/sign-in.png',
+    imageUrl: `${prefix}/screens/sign-in.png`,
     figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/Izgzufe5syG3KcDR7fdPVX/Verifluence.io-MVP-Design?node-id=1601%3A27448',
     category: 'Auth',
     description: 'Авторизация/вход в платформу',
