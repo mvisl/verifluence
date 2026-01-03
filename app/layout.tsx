@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Verifluence - Crypto Casino Prototype',
-  description: 'Прототип криптоказино с навигацией по экранам Figma',
+  description: 'Crypto casino prototype with navigation across Figma screens',
 }
 
 export default function RootLayout({
@@ -12,10 +12,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru">
+    <html lang="en">
       <body>{children}</body>
     </html>
   )
 }
-
 

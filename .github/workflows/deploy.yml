@@ -37,6 +37,11 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /verifluence
 
+      - name: Export static site
+        run: npm run export
+        env:
+          NEXT_PUBLIC_BASE_PATH: /verifluence
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

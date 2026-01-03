@@ -5,13 +5,13 @@ import { screens } from '@/config/screens'
 import { useState } from 'react'
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  'Структура': { bg: 'rgba(147, 51, 234, 0.2)', text: '#a855f7', border: 'rgba(147, 51, 234, 0.3)' },
-  'Casino': { bg: 'rgba(255, 107, 107, 0.2)', text: '#ff6b6b', border: 'rgba(255, 107, 107, 0.3)' },
-  'Streamer': { bg: 'rgba(78, 205, 196, 0.2)', text: '#4ecdc4', border: 'rgba(78, 205, 196, 0.3)' },
-  'Аутентификация': { bg: 'rgba(34, 197, 94, 0.2)', text: '#22c55e', border: 'rgba(34, 197, 94, 0.3)' },
-  'Онбординг': { bg: 'rgba(251, 191, 36, 0.2)', text: '#fbbf24', border: 'rgba(251, 191, 36, 0.3)' },
-  'Admin': { bg: 'rgba(239, 68, 68, 0.2)', text: '#ef4444', border: 'rgba(239, 68, 68, 0.3)' },
-  'Дизайн': { bg: 'rgba(168, 85, 247, 0.2)', text: '#a855f7', border: 'rgba(168, 85, 247, 0.3)' },
+  Structure: { bg: 'rgba(147, 51, 234, 0.2)', text: '#a855f7', border: 'rgba(147, 51, 234, 0.3)' },
+  Casino: { bg: 'rgba(255, 107, 107, 0.2)', text: '#ff6b6b', border: 'rgba(255, 107, 107, 0.3)' },
+  Streamer: { bg: 'rgba(78, 205, 196, 0.2)', text: '#4ecdc4', border: 'rgba(78, 205, 196, 0.3)' },
+  Auth: { bg: 'rgba(34, 197, 94, 0.2)', text: '#22c55e', border: 'rgba(34, 197, 94, 0.3)' },
+  Onboarding: { bg: 'rgba(251, 191, 36, 0.2)', text: '#fbbf24', border: 'rgba(251, 191, 36, 0.3)' },
+  Admin: { bg: 'rgba(239, 68, 68, 0.2)', text: '#ef4444', border: 'rgba(239, 68, 68, 0.3)' },
+  Design: { bg: 'rgba(168, 85, 247, 0.2)', text: '#a855f7', border: 'rgba(168, 85, 247, 0.3)' },
 }
 
 export default function Home() {
@@ -41,10 +41,10 @@ export default function Home() {
             Verifluence
           </h1>
           <p style={{ fontSize: '1.2rem', color: '#a0a0a0', marginBottom: '2rem' }}>
-            Прототип платформы для криптоказино - карта сайта и навигация по экранам
+            Crypto casino platform prototype – sitemap and navigation for Figma screens
           </p>
           
-          {/* Фильтры по категориям */}
+          {/* Category filters */}
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -76,7 +76,7 @@ export default function Home() {
                 }
               }}
             >
-              Все экраны ({screens.length})
+              All screens ({screens.length})
             </button>
             {categories.map((category) => {
               const color = categoryColors[category] || { bg: 'rgba(255, 255, 255, 0.1)', text: '#ffffff', border: 'rgba(255, 255, 255, 0.2)' }
@@ -116,7 +116,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Сетка экранов */}
+        {/* Screens grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -168,7 +168,7 @@ export default function Home() {
                         fontSize: '0.7rem',
                         color: '#a0a0a0',
                         opacity: 0.7,
-                      }} title="Доступно изображение">
+                      }} title="Image available">
                         📷
                       </span>
                     )}
@@ -177,7 +177,7 @@ export default function Home() {
                         fontSize: '0.7rem',
                         color: '#a0a0a0',
                         opacity: 0.7,
-                      }} title="Доступен интерактивный прототип">
+                      }} title="Interactive prototype available">
                         🎨
                       </span>
                     )}
@@ -205,43 +205,7 @@ export default function Home() {
           })}
         </div>
 
-        {/* Информационный блок */}
-        <div style={{
-          marginTop: '3rem',
-          padding: '1.5rem',
-          background: 'rgba(78, 205, 196, 0.1)',
-          border: '1px solid rgba(78, 205, 196, 0.3)',
-          borderRadius: '12px',
-        }}>
-          <h3 style={{ marginBottom: '1rem', color: '#4ecdc4', fontSize: '1.1rem' }}>
-            📋 Инструкция
-          </h3>
-          <p style={{ color: '#a0a0a0', lineHeight: '1.6', marginBottom: '0.5rem' }}>
-            Для добавления реальных экранов из Figma, отредактируйте файл{' '}
-            <code style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              padding: '0.2rem 0.5rem',
-              borderRadius: '4px',
-              fontSize: '0.85rem',
-            }}>config/screens.ts</code>
-            {' '}и замените <code style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              padding: '0.2rem 0.5rem',
-              borderRadius: '4px',
-              fontSize: '0.85rem',
-            }}>YOUR_FIGMA_URL</code> на реальные ссылки из Figma.
-          </p>
-          <p style={{ color: '#a0a0a0', lineHeight: '1.6', fontSize: '0.9rem' }}>
-            Формат ссылки: <code style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              padding: '0.2rem 0.5rem',
-              borderRadius: '4px',
-              fontSize: '0.85rem',
-            }}>https://www.figma.com/embed?embed_host=share&url=ВАША_ССЫЛКА</code>
-          </p>
-        </div>
       </div>
     </main>
   )
 }
-

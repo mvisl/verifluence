@@ -1,14 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { screens } from '@/config/screens'
 
+type ViewMode = 'image' | 'iframe' | 'flowImage' | 'flowEmbed'
+
 export default function ScreenPageClient({ id }: { id: string }) {
   const screen = screens.find((s) => s.id === id)
-  const [viewMode, setViewMode] = useState<'image' | 'iframe'>(
-    screen?.imageUrl ? 'image' : 'iframe'
-  )
+  const hasImage = Boolean(screen?.imageUrl)
+  const hasFigma = Boolean(screen?.figmaUrl)
+  const hasFlowImage = Boolean(screen?.flowImageUrl)
+  const hasFlowEmbed = Boolean(screen?.flowEmbedUrl)
+
+  const defaultViewMode: ViewMode = useMemo(() => {
+    if (hasImage) return 'image'
+    if (hasFigma) return 'iframe'
+    if (hasFlowImage) return 'flowImage'
+    if (hasFlowEmbed) return 'flowEmbed'
+    return 'image'
+  }, [hasImage, hasFigma, hasFlowImage, hasFlowEmbed])
+
+  const [viewMode, setViewMode] = useState<ViewMode>(defaultViewMode)
+
+  useEffect(() => {
+    setViewMode(defaultViewMode)
+  }, [defaultViewMode, id])
 
   if (!screen) {
     return (
@@ -22,7 +39,7 @@ export default function ScreenPageClient({ id }: { id: string }) {
           padding: '2rem',
         }}
       >
-        <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Экран не найден</h1>
+        <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Screen not found</h1>
         <Link
           href="/"
           style={{
@@ -40,7 +57,7 @@ export default function ScreenPageClient({ id }: { id: string }) {
             e.currentTarget.style.background = 'rgba(78, 205, 196, 0.2)'
           }}
         >
-          Вернуться на карту сайта
+          Back to sitemap
         </Link>
       </div>
     )
@@ -48,7 +65,6 @@ export default function ScreenPageClient({ id }: { id: string }) {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Навигационная панель */}
       <nav
         style={{
           padding: '1rem 2rem',
@@ -80,14 +96,13 @@ export default function ScreenPageClient({ id }: { id: string }) {
             e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
           }}
         >
-          ← Карта сайта
+          ← Sitemap
         </Link>
         <h1 style={{ fontSize: '1.2rem', fontWeight: '600' }}>{screen.name}</h1>
-        <div style={{ width: '120px' }} /> {/* Spacer для центрирования */}
+        <div style={{ width: '120px' }} /> {/* Spacer for centering */}
       </nav>
 
-      {/* Переключатель режима просмотра */}
-      {screen.imageUrl && screen.figmaUrl && (
+      {(hasImage || hasFigma || hasFlowImage || hasFlowEmbed) && (
         <div
           style={{
             padding: '0.5rem 2rem',
@@ -96,48 +111,92 @@ export default function ScreenPageClient({ id }: { id: string }) {
             display: 'flex',
             gap: '0.5rem',
             justifyContent: 'center',
+            flexWrap: 'wrap',
           }}
         >
-          <button
-            onClick={() => setViewMode('image')}
-            style={{
-              padding: '0.5rem 1rem',
-              background:
-                viewMode === 'image' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
-              border: `1px solid ${
-                viewMode === 'image' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
-              }`,
-              borderRadius: '6px',
-              color: viewMode === 'image' ? '#4ecdc4' : '#a0a0a0',
-              cursor: 'pointer',
-              fontSize: '0.85rem',
-              transition: 'all 0.3s ease',
-            }}
-          >
-            📷 Изображение
-          </button>
-          <button
-            onClick={() => setViewMode('iframe')}
-            style={{
-              padding: '0.5rem 1rem',
-              background:
-                viewMode === 'iframe' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
-              border: `1px solid ${
-                viewMode === 'iframe' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
-              }`,
-              borderRadius: '6px',
-              color: viewMode === 'iframe' ? '#4ecdc4' : '#a0a0a0',
-              cursor: 'pointer',
-              fontSize: '0.85rem',
-              transition: 'all 0.3s ease',
-            }}
-          >
-            🎨 Интерактивный прототип
-          </button>
+          {hasImage && (
+            <button
+              onClick={() => setViewMode('image')}
+              style={{
+                padding: '0.5rem 1rem',
+                background:
+                  viewMode === 'image' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                border: `1px solid ${
+                  viewMode === 'image' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
+                }`,
+                borderRadius: '6px',
+                color: viewMode === 'image' ? '#4ecdc4' : '#a0a0a0',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              📷 Screens (image)
+            </button>
+          )}
+          {hasFigma && (
+            <button
+              onClick={() => setViewMode('iframe')}
+              style={{
+                padding: '0.5rem 1rem',
+                background:
+                  viewMode === 'iframe' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                border: `1px solid ${
+                  viewMode === 'iframe' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
+                }`,
+                borderRadius: '6px',
+                color: viewMode === 'iframe' ? '#4ecdc4' : '#a0a0a0',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              🎨 Screens (prototype)
+            </button>
+          )}
+          {hasFlowImage && (
+            <button
+              onClick={() => setViewMode('flowImage')}
+              style={{
+                padding: '0.5rem 1rem',
+                background:
+                  viewMode === 'flowImage' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                border: `1px solid ${
+                  viewMode === 'flowImage' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
+                }`,
+                borderRadius: '6px',
+                color: viewMode === 'flowImage' ? '#4ecdc4' : '#a0a0a0',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              🧭 Flow (image)
+            </button>
+          )}
+          {hasFlowEmbed && (
+            <button
+              onClick={() => setViewMode('flowEmbed')}
+              style={{
+                padding: '0.5rem 1rem',
+                background:
+                  viewMode === 'flowEmbed' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                border: `1px solid ${
+                  viewMode === 'flowEmbed' ? '#4ecdc4' : 'rgba(255, 255, 255, 0.2)'
+                }`,
+                borderRadius: '6px',
+                color: viewMode === 'flowEmbed' ? '#4ecdc4' : '#a0a0a0',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              🧭 Flow (slides)
+            </button>
+          )}
         </div>
       )}
 
-      {/* Контейнер для контента */}
       <div
         style={{
           flex: 1,
@@ -180,6 +239,51 @@ export default function ScreenPageClient({ id }: { id: string }) {
               />
             </div>
           </div>
+        ) : viewMode === 'flowImage' && screen.flowImageUrl ? (
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              padding: '2rem',
+              minHeight: 'calc(100vh - 120px)',
+            }}
+          >
+            <div
+              style={{
+                maxWidth: '100%',
+                position: 'relative',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+                borderRadius: '8px',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={screen.flowImageUrl}
+                alt={`${screen.name} flow`}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  maxWidth: '1920px',
+                }}
+              />
+            </div>
+          </div>
+        ) : viewMode === 'flowEmbed' && screen.flowEmbedUrl ? (
+          <iframe
+            src={screen.flowEmbedUrl}
+            style={{
+              width: '100%',
+              height: '100%',
+              minHeight: 'calc(100vh - 120px)',
+              border: 'none',
+              background: '#0a0a0a',
+            }}
+            allowFullScreen
+            title={`${screen.name} flow`}
+          />
         ) : screen.figmaUrl ? (
           <iframe
             src={screen.figmaUrl}
@@ -236,12 +340,11 @@ export default function ScreenPageClient({ id }: { id: string }) {
               color: '#a0a0a0',
             }}
           >
-            <p>Контент не доступен. Добавьте imageUrl или figmaUrl в конфигурацию.</p>
+            <p>Content is not available. Add imageUrl or figmaUrl in the configuration.</p>
           </div>
         )}
       </div>
 
-      {/* Информационная панель внизу */}
       <div
         style={{
           padding: '1rem 2rem',
